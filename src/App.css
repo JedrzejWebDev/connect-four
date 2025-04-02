@@ -1,0 +1,83 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background-color: #282c34;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  background: blue;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 90vw;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.cell {
+  width: 10vw;
+  height: 10vw;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  background: white;
+  margin: 0.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.disc {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+}
+
+.disc.R {
+  background: red;
+}
+
+.disc.Y {
+  background: yellow;
+}
+
+/* 📱 Responsywność dla telefonów */
+@media (max-width: 600px) {
+  .cell {
+    width: 12vw;
+    height: 12vw;
+    max-width: 50px;
+    max-height: 50px;
+    margin: 0.8vw;
+  }
+}
+
+/* 📱 Dla orientation landscape */
+/* od 667 do 1368 */
+@media (orientation: landscape) and (min-width: 667px) and (max-width: 1368px) {
+  .cell {
+    width: 10vw;
+    height: 10vw;
+    max-width: 30px;
+    max-height: 30px;
+    margin: 0.8vw;
+  }
+}
+
+/* Podświetlanie */
+.cell.highlight-red {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.cell.highlight-yellow {
+  background-color: rgba(255, 255, 0, 0.3);
+}
