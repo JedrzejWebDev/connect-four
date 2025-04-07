@@ -1,0 +1,11 @@
+.stats-container {
+    height: 100vh;
+    background-color: #666;
+}
+
+.gamepad-icon {
+    position: absolute;
+    font-size: 36px;
+    left: 15px;
+    bottom: 15px;
+}

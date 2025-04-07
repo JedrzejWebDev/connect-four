@@ -4,6 +4,8 @@ import "./App.css";
 import { BsInfoSquareFill } from "react-icons/bs";
 import { FaExpand, FaCompress } from "react-icons/fa";
 import { IoIosRefresh } from "react-icons/io";
+import { FcStatistics } from "react-icons/fc";
+import { StatsChart } from "./StatsChart";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showStats, setShowStats] = useState(false);
 
   const isTouchDevice = "ontouchstart" in window;
 
@@ -97,114 +100,145 @@ function App() {
     }
   };
 
+  const handleClickRefreshBoard = () => {
+    setBoard(
+      Array(6)
+        .fill(null)
+        .map(() => Array(7).fill(null))
+    );
+    setCurrentPlayer("R");
+    setGameOver(false);
+    setHoveredCol(null);
+  };
+
   return (
-    <div className="game-container">
-      <BsInfoSquareFill
-        className="info-icon"
-        onClick={() => setShowInstructions(true)}
-      />
-      <Modal
-        isOpen={showInstructions}
-        onRequestClose={() => setShowInstructions(false)}
-        contentLabel="Instrukcja do gry"
-        className="ModalContent"
-        overlayClassName="ModalOverlay"
-      >
-        <p>
-          <strong>Instrukcje gry Connect Four:</strong>
-        </p>
-        <ul>
-          <li>
-            <strong>Celem gry:</strong> Ułóż cztery swoje pionki w jednej linii
-            - poziomo, pionowo lub diagonalnie.
-          </li>
-          <li>
-            <strong>Rozpoczęcie gry:</strong> Gra toczy się na planszy o
-            wymiarach 7x6. Gracze na zmianę umieszczają swoje pionki w
-            kolumnach.
-          </li>
-          <li>
-            <strong>Przyjmowanie ruchów:</strong> W swojej turze gracz wybiera
-            jedną z siedmiu kolumn i wrzuca pionek na planszę. Pionek opada na
-            najniższą dostępną wolną pozycję w danej kolumnie.
-          </li>
-          <li>
-            <strong>Wygrać grę:</strong> Gracz, który pierwszy ułoży cztery
-            pionki w jednej linii (poziomo, pionowo lub na przekątnej), wygrywa
-            grę.
-          </li>
-          <li>
-            <strong>Remis:</strong> Jeśli plansza zostanie zapełniona, a żaden z
-            graczy nie ułoży czterech pionków w linii, gra kończy się remisem.
-          </li>
-          <li>
-            <strong>Strategia:</strong> Pamiętaj, aby blokować przeciwnika i
-            szukać okazji do stworzenia własnych linii czterech pionków.
-          </li>
-        </ul>
-        <p>Powodzenia i miłej zabawy!</p>
-        <button onClick={() => setShowInstructions(false)}>Zamknij</button>
-      </Modal>
+    <>
+      {!showStats ? (
+        <div className="game-container">
+          <BsInfoSquareFill
+            className="info-icon"
+            onClick={() => setShowInstructions(true)}
+          />
+          <Modal
+            isOpen={showInstructions}
+            onRequestClose={() => setShowInstructions(false)}
+            contentLabel="Instrukcja do gry"
+            className="ModalContent"
+            overlayClassName="ModalOverlay"
+          >
+            <p>
+              <strong>Instrukcje gry Connect Four:</strong>
+            </p>
+            <ul>
+              <li>
+                <strong>Celem gry:</strong> Ułóż cztery swoje pionki w jednej
+                linii - poziomo, pionowo lub diagonalnie.
+              </li>
+              <li>
+                <strong>Rozpoczęcie gry:</strong> Gra toczy się na planszy o
+                wymiarach 7x6. Gracze na zmianę umieszczają swoje pionki w
+                kolumnach.
+              </li>
+              <li>
+                <strong>Przyjmowanie ruchów:</strong> W swojej turze gracz
+                wybiera jedną z siedmiu kolumn i wrzuca pionek na planszę.
+                Pionek opada na najniższą dostępną wolną pozycję w danej
+                kolumnie.
+              </li>
+              <li>
+                <strong>Wygrać grę:</strong> Gracz, który pierwszy ułoży cztery
+                pionki w jednej linii (poziomo, pionowo lub na przekątnej),
+                wygrywa grę.
+              </li>
+              <li>
+                <strong>Remis:</strong> Jeśli plansza zostanie zapełniona, a
+                żaden z graczy nie ułoży czterech pionków w linii, gra kończy
+                się remisem.
+              </li>
+              <li>
+                <strong>Strategia:</strong> Pamiętaj, aby blokować przeciwnika i
+                szukać okazji do stworzenia własnych linii czterech pionków.
+              </li>
+            </ul>
+            <p>Powodzenia i miłej zabawy!</p>
+            <button onClick={() => setShowInstructions(false)}>Zamknij</button>
+          </Modal>
 
-      <h1 className="game-title">Connect Four</h1>
+          <h1 className="game-title">Connect Four</h1>
 
-      <div
-        className="icon-to-zoom-in-or-out"
-        onClick={toggleFullscreen}
-        aria-label="Przełącz tryb pełnoekranowy"
-      >
-        {isFullscreen ? <FaCompress /> : <FaExpand />}
-      </div>
-
-      <div className="board">
-        {board.map((row, rowIndex) => (
-          <div key={rowIndex} className="row">
-            {row.map((cell, colIndex) => {
-              const availableRow = getAvailableRow(colIndex);
-              const isHighlight =
-                !gameOver &&
-                !isTouchDevice &&
-                hoveredCol === colIndex &&
-                availableRow === rowIndex;
-              return (
-                <div
-                  key={colIndex}
-                  className="cell"
-                  style={{ cursor: gameOver ? "default" : "pointer" }}
-                  onMouseEnter={
-                    !isTouchDevice && !gameOver
-                      ? () => setHoveredCol(colIndex)
-                      : undefined
-                  }
-                  onMouseLeave={
-                    !isTouchDevice && !gameOver
-                      ? () => setHoveredCol(null)
-                      : undefined
-                  }
-                  onClick={() => handleCellClick(colIndex)}
-                >
-                  {isHighlight && <div className={`disc ${currentPlayer}`} />}
-                  {cell && <div className={`disc ${cell}`} />}
-                </div>
-              );
-            })}
+          <div
+            className="icon-to-zoom-in-or-out"
+            onClick={toggleFullscreen}
+            aria-label="Przełącz tryb pełnoekranowy"
+          >
+            {isFullscreen ? <FaCompress /> : <FaExpand />}
           </div>
-        ))}
-      </div>
 
-      <div className="game-status">
-        <span className="result-message">
-          {gameOver
-            ? isBoardFull(board)
-              ? "Remis!"
-              : `Gracz ${currentPlayer} wygrywa!`
-            : ""}
-        </span>
-        <div className="refresh-board">
-          {gameOver ? <IoIosRefresh className="refresh-icon"/> : null}
+          <div className="board">
+            {board.map((row, rowIndex) => (
+              <div key={rowIndex} className="row">
+                {row.map((cell, colIndex) => {
+                  const availableRow = getAvailableRow(colIndex);
+                  const isHighlight =
+                    !gameOver &&
+                    !isTouchDevice &&
+                    hoveredCol === colIndex &&
+                    availableRow === rowIndex;
+                  return (
+                    <div
+                      key={colIndex}
+                      className="cell"
+                      style={{ cursor: gameOver ? "default" : "pointer" }}
+                      onMouseEnter={
+                        !isTouchDevice && !gameOver
+                          ? () => setHoveredCol(colIndex)
+                          : undefined
+                      }
+                      onMouseLeave={
+                        !isTouchDevice && !gameOver
+                          ? () => setHoveredCol(null)
+                          : undefined
+                      }
+                      onClick={() => handleCellClick(colIndex)}
+                    >
+                      {isHighlight && (
+                        <div className={`disc ${currentPlayer}`} />
+                      )}
+                      {cell && <div className={`disc ${cell}`} />}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+
+          <FcStatistics
+            className="statistics-icon"
+            onClick={() => setShowStats(true)}
+          />
+
+          <div className="game-status">
+            <span className="result-message">
+              {gameOver
+                ? isBoardFull(board)
+                  ? "Remis!"
+                  : `Gracz ${currentPlayer} wygrywa!`
+                : ""}
+            </span>
+            <div className="refresh-board">
+              {gameOver ? (
+                <IoIosRefresh
+                  className="refresh-icon"
+                  onClick={handleClickRefreshBoard}
+                />
+              ) : null}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <StatsChart setShowStats={setShowStats}/>
+      )}
+    </>
   );
 }
 

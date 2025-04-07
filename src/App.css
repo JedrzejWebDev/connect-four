@@ -111,6 +111,13 @@
   background: yellow;
 }
 
+.statistics-icon {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 36px;
+}
+
 .game-status {
   display: flex;
 }
