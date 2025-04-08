@@ -20,6 +20,9 @@ function App() {
   const [showInstructions, setShowInstructions] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [rWins, setRWins] = useState(0);
+  const [yWins, setYWins] = useState(0);
+  const [draws, setDraws] = useState(0);
 
   const isTouchDevice = "ontouchstart" in window;
 
@@ -92,8 +95,14 @@ function App() {
       const detectedWinner = checkWinner(newBoard);
       if (detectedWinner) {
         setGameOver(true);
+        if (detectedWinner === "R") {
+          setRWins((prev) => prev + 1);
+        } else if (detectedWinner === "Y") {
+          setYWins((prev) => prev + 1);
+        }
       } else if (isBoardFull(newBoard)) {
         setGameOver(true);
+        setDraws((prev) => prev + 1);
       } else {
         setCurrentPlayer(currentPlayer === "R" ? "Y" : "R");
       }
@@ -236,7 +245,7 @@ function App() {
           </div>
         </div>
       ) : (
-        <StatsChart setShowStats={setShowStats}/>
+        <StatsChart rWins={rWins} yWins={yWins} draws={draws} setShowStats={setShowStats} />
       )}
     </>
   );
