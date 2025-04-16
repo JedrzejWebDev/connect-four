@@ -4,67 +4,52 @@
   box-sizing: border-box;
 }
 
-.game-container {
-  height: 100vh;
+body {
   background-color: #666;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
+
+.info-icon,
+.screen-size-icon,
+.stats-icon,
+.game-icon {
+  position: absolute;
+  font-size: 36px;
 }
 
 .info-icon {
-  position: absolute;
-  font-size: 36px;
   top: 15px;
   left: 15px;
 }
 
 .ModalContent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: white;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  height: 100vh;
+  outline: none;
+  padding: 50px;
 }
 
 .ModalContent p {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin: 10px 0;
 }
 
-.ModalOverlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.ModalContent button {
+  padding: 5px 10px;
 }
 
-.game-title {
-  text-align: center;
-  height: 13vh;
-  line-height: 13vh;
-}
-
-.icon-to-zoom-in-or-out {
-  position: absolute;
+.screen-size-icon {
   top: 15px;
   right: 15px;
-  font-size: 36px;
-  height: 36px;
+}
+
+.game-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .board {
@@ -111,32 +96,18 @@
   background: yellow;
 }
 
-.statistics-icon {
-  position: absolute;
+.stats-icon,
+.game-icon {
   bottom: 15px;
   left: 15px;
+}
+
+.refresh-icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
   font-size: 36px;
 }
-
-.game-status {
-  display: flex;
-}
-
-.result-message {
-  font-size: 24px;
-  min-width: 100px;
-  height: 13vh;
-  text-align: center;
-  margin-right: 4px;
-}
-
-.refresh-board {
-  font-size: 24px;
-  height: 24px;
-  margin-left: 4px;
-}
-
-/* Landscape */
 
 @media (orientation: landscape) and (max-width: 1368px) {
   .cell {

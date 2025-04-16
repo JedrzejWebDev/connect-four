@@ -1,6 +1,5 @@
 import { PieChart, Pie, Cell, Legend } from "recharts";
-import { FaGamepad } from "react-icons/fa";
-import "./StatsChart.css";
+import { GameIcon } from "../Icons/GameIcon";
 
 const COLORS = ["#ff4136", "#ffdc00", "#aaa"];
 
@@ -11,7 +10,7 @@ type Props = {
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const StatsChart = ({ rWins, yWins, draws, setShowStats }: Props) => {
+const StatsPanel = ({ rWins, yWins, draws, setShowStats }: Props) => {
   const rawData = [
     { name: "Wygrane (R)", value: rWins },
     { name: "Wygrane (Y)", value: yWins },
@@ -23,13 +22,20 @@ export const StatsChart = ({ rWins, yWins, draws, setShowStats }: Props) => {
   if (data.length === 0) {
     return (
       <div className="stats-container">
-        <p style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", textAlign: "center", fontSize: "18px", color: "#000" }}>
+        <p
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            fontSize: "18px",
+            color: "#000",
+          }}
+        >
           Zagraj przynajmniej jedną grę, by zobaczyć statystyki 🎯
         </p>
-        <FaGamepad
-          className="gamepad-icon"
-          onClick={() => setShowStats(false)}
-        />
+        <GameIcon setShowStats={setShowStats} />
       </div>
     );
   }
@@ -98,7 +104,9 @@ export const StatsChart = ({ rWins, yWins, draws, setShowStats }: Props) => {
           )}
         />
       </PieChart>
-      <FaGamepad className="gamepad-icon" onClick={() => setShowStats(false)} />
+      <GameIcon setShowStats={setShowStats} />
     </div>
   );
 };
+
+export default StatsPanel;
