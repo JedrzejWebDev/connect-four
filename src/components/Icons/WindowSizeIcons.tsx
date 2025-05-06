@@ -1,8 +1,13 @@
-import { useState } from "react";
 import { FaExpand, FaCompress } from "react-icons/fa";
 
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/index";
+import { useDispatch } from "react-redux";
+import {setIsFullscreen} from '../../store/gameSlice';
+
 export const WindowSizeIcons = () => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const isFullscreen = useSelector((state : RootState) => state.game.isFullscreen);
+  const dispatch = useDispatch();
 
   const toggleFullscreen = () => {
     if (!isFullscreen) {
@@ -15,7 +20,7 @@ export const WindowSizeIcons = () => {
       }
     }
 
-    setIsFullscreen(!isFullscreen);
+    dispatch(setIsFullscreen(!isFullscreen));
   };
 
   return (

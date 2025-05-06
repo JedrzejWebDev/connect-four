@@ -1,14 +1,14 @@
 import { BsInfoSquareFill } from "react-icons/bs";
 
-type InfoIconProps = {
-  setShowInstructions: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useDispatch } from "react-redux";
+import { setShowInstructions } from "../../store/gameSlice";
 
-export const InfoIcon = ({ setShowInstructions }: InfoIconProps) => {
+export const InfoIcon = () => {
+  const dispatch = useDispatch();
   return (
     <BsInfoSquareFill
       className="info-icon"
-      onClick={() => setShowInstructions(true)}
+      onClick={() => dispatch(setShowInstructions(true))}
     />
   );
 };

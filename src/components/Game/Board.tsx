@@ -1,4 +1,5 @@
 import { Cell } from "./Cell";
+import '../../App.css';
 
 type BoardProps = {
   board: (string | null)[][];

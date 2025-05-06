@@ -1,14 +1,21 @@
 import { useConnectFour } from "../../hooks/useConnectFour";
-import { Statistics } from "./Statistics";
 import { Board } from "./Board";
 import { RefreshIcon } from "../Icons/RefreshIcon";
 import { GameContext } from "../../context/GameContext";
-import { useState } from "react";
+import { Statistics } from "./Statistics";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/index";
+import { setShowStats } from "../../store/gameSlice";
 
 export const Game = () => {
   const { board, gameOver, rWins, yWins, draws, handleCellClick, resetGame } =
     useConnectFour();
-  const [showStats, setShowStats] = useState(false);
+
+    const showStats = useSelector(
+      (state: RootState) => state.game.showStats
+    );
+    
   return (
     <>
       <div

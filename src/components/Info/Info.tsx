@@ -1,21 +1,20 @@
 import { InfoModal } from "./InfoModal";
 import { InfoIcon } from "../Icons/InfoIcon";
 
-type InfoProps = {
-  showInstructions: boolean;
-  setShowInstructions: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/index";
 
-export const Info = ({showInstructions, setShowInstructions} : InfoProps) => {
+export const Info = () => {
+  const showInstructions = useSelector(
+    (state: RootState) => state.game.showInstructions
+  );
+
   return (
     <>
       {showInstructions ? (
-        <InfoModal
-          showInstructions={showInstructions}
-          setShowInstructions={setShowInstructions}
-        />
+        <InfoModal />
       ) : (
-        <InfoIcon setShowInstructions={setShowInstructions}/>
+        <InfoIcon />
       )}
     </>
   );

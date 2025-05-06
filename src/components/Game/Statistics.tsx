@@ -13,14 +13,13 @@ export const Statistics = ({
   yWins,
   draws,
   showStats,
-  setShowStats,
 }: StatisticProps) => {
   return (
     <>
       {!showStats ? (
-        <StatisticsIcon setShowStats={setShowStats}/>
+        <StatisticsIcon />
       ) : (
-        <StatsPanel rWins={rWins} yWins={yWins} draws={draws} setShowStats={setShowStats}/>
+        <StatsPanel rWins={rWins} yWins={yWins} draws={draws} />
       )}
     </>
   );

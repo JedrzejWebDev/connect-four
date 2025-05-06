@@ -1,15 +1,18 @@
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
-type InfoModalProps = {
-    showInstructions: boolean;
-    setShowInstructions: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/index";
+import { setShowInstructions } from "../../store/gameSlice";
 
-export const InfoModal = ({showInstructions, setShowInstructions} : InfoModalProps) => {
+export const InfoModal = () => {
+  const showInstructions = useSelector(
+    (state: RootState) => state.game.showInstructions
+  );
+  const dispatch = useDispatch();
   return (
     <Modal
       isOpen={showInstructions}
-      onRequestClose={() => setShowInstructions(false)}
+      onRequestClose={() => dispatch(setShowInstructions(false))}
       contentLabel="Instrukcja do gry"
       className="ModalContent"
       overlayClassName="ModalOverlay"
@@ -45,7 +48,7 @@ export const InfoModal = ({showInstructions, setShowInstructions} : InfoModalPro
         </li>
       </ul>
       <p>Powodzenia i miłej zabawy!</p>
-      <button onClick={() => setShowInstructions(false)}>Zamknij</button>
+      <button onClick={() => dispatch(setShowInstructions(false))}>Zamknij</button>
     </Modal>
   );
 };

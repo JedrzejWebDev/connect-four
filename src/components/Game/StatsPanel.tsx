@@ -7,10 +7,9 @@ type Props = {
   rWins: number;
   yWins: number;
   draws: number;
-  setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const StatsPanel = ({ rWins, yWins, draws, setShowStats }: Props) => {
+const StatsPanel = ({ rWins, yWins, draws }: Props) => {
   const rawData = [
     { name: "Wygrane (R)", value: rWins },
     { name: "Wygrane (Y)", value: yWins },
@@ -35,7 +34,7 @@ const StatsPanel = ({ rWins, yWins, draws, setShowStats }: Props) => {
         >
           Zagraj przynajmniej jedną grę, by zobaczyć statystyki 🎯
         </p>
-        <GameIcon setShowStats={setShowStats} />
+        <GameIcon />
       </div>
     );
   }
@@ -104,7 +103,7 @@ const StatsPanel = ({ rWins, yWins, draws, setShowStats }: Props) => {
           )}
         />
       </PieChart>
-      <GameIcon setShowStats={setShowStats} />
+      <GameIcon />
     </div>
   );
 };

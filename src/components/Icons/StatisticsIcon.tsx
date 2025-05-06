@@ -1,11 +1,11 @@
 import { FcStatistics } from "react-icons/fc";
 
-type StatisticsIconProps = {
-  setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useDispatch } from "react-redux";
+import { setShowStats } from "../../store/gameSlice";
 
-export const StatisticsIcon = ({setShowStats} : StatisticsIconProps) => {
+export const StatisticsIcon = () => {
+  const dispatch = useDispatch();
   return (
-    <FcStatistics className="stats-icon" onClick={() => setShowStats(true)} />
+    <FcStatistics className="stats-icon" onClick={() => dispatch(setShowStats(true))} />
   );
 };

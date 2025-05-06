@@ -1,11 +1,11 @@
 import { FaGamepad } from "react-icons/fa";
 
-type GameIconProps = {
-  setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useDispatch } from "react-redux";
+import { setShowStats } from "../../store/gameSlice";
 
-export const GameIcon = ({ setShowStats }: GameIconProps) => {
+export const GameIcon = () => {
+  const dispatch = useDispatch();
   return (
-    <FaGamepad className="game-icon" onClick={() => setShowStats(false)} />
+    <FaGamepad className="game-icon" onClick={() => dispatch(setShowStats(false))} />
   );
 };
