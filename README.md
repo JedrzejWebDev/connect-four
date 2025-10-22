@@ -1,54 +1,20 @@
-# React + TypeScript + Vite
+🧩 Struktura projektu:
+src/components/Game - zawiera komponenty odpowiedzialne za wyświetlanie planszy oraz statystyk a także zarządzanie ich stanem
+src/components/Icons - posiada ikony po których kliknięciu następuje stosowne zachowanie
+src/components/Info - zawarte są Modal z instrukcjami gry oraz wykorzystywany komponent z ikonką służącą do jego wyświetlania
+src/components/App.tsx - nadrzędny komponent posiłkujący się komponentami z folderów Game, Icons oraz Info
+src/context/GameContext.tsx - kontekst zawierający obsługę kliknięcia komórki oraz wykrywający koniec gry
+src/hooks/useConntectFour.ts - hook z całą logiką gry od obsługi kliknięć w planszę, przez zmianę gracza, po wykrywanie zwycięzcy lub remisu
+src/store/gameSlice.ts - odpowiada za globalny stan interfejsu gry — m.in. wyświetlanie instrukcji, statystyk i tryb pełnoekranowy
+src/store/index.ts - konfiguruje i eksportuje globalny store
+src/App.css - style dla całej gry z użyciem flexboxa oraz media queries dla responsywności
+src/main.tsx - punkt startowy aplikacji. Integruje Redux przez Provider i renderuje komponent App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠️ Technologie:
+redux, context, react-icons, react-modal, recharts
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+⚙️ Instalacja i uruchomienie:
+git clone https://github.com/JedrzejWebDev/connect-four.git
+cd connect-four
+npm install
+npm run dev
