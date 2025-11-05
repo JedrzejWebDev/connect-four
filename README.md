@@ -1,3 +1,5 @@
+https://jedrzejwebdev.github.io/connect-four/
+
 ## 🧩 Struktura projektu:  
 **src/components/Game** - zawiera komponenty odpowiedzialne za wyświetlanie planszy oraz statystyk, a także zarządzanie ich stanem  
 **src/components/Icons** - posiada ikony, po których kliknięciu następuje stosowne zachowanie  
